@@ -24,8 +24,13 @@ image_response = client.analyze_image_url('http://www.example.com/image')
 
 An instance of `VisualFeatures` can be supplied to the `analyze` methods to return additional data from the API
 ```
-# Returns ImageResponse object with only categories (default from API)
+# Returns ImageResponse object with faces and adult
 image_response = client.analyze_image_url('http://www.example.com/image', VisualFeatures(faces=True, adult=True)
+```
+
+There is a default methond on `VisualFeatures` that returns an instance with all features set to `True`:
+```
+image_response = client.analyze_image_url('http://www.example.com/image', VisualFeatures.default())
 ```
 
 ## Tests
