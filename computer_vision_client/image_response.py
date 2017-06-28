@@ -8,8 +8,16 @@ class ImageResponse(object):
         return self.data.get('adult', {}).get('isRacyContent', None)
 
     @property
+    def racy_score(self):
+        return self.data.get('adult', {}).get('racyScore', 0.0)
+
+    @property
     def is_adult_content(self):
         return self.data.get('adult', {}).get('isAdultContent', None)
+
+    @property
+    def adult_score(self):
+        return self.data.get('adult', {}).get('adultScore', 0.0)
 
     @property
     def categories(self):
@@ -30,3 +38,11 @@ class ImageResponse(object):
     @property
     def description(self):
         return self.data.get('description', {})
+
+    @property
+    def faces(self):
+        return self.data.get('faces', [])
+
+    @property
+    def image_type(self):
+        return self.data.get('imageType', {})
