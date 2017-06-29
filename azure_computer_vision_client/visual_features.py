@@ -1,7 +1,5 @@
 class VisualFeatures(object):
 
-    option_name = 'visualFeatures'
-
     def __init__(self,
                  categories=False,
                  tags=False,
@@ -23,7 +21,7 @@ class VisualFeatures(object):
     def as_dict(self):
         filtered_props = [prop for prop, value in self.props.iteritems() if value]
         if filtered_props:
-            return { self.option_name: ",".join(filtered_props) }
+            return { 'visualFeatures': ",".join(filtered_props) }
 
     @staticmethod
     def default():

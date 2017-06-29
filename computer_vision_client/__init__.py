@@ -1,3 +1,0 @@
-from computer_vision_client.client import ComputerVisionClient
-from computer_vision_client.image_response import ImageResponse
-from computer_vision_client.visual_features import VisualFeatures

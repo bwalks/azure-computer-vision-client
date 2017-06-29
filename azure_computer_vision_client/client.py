@@ -2,26 +2,26 @@ import os, urllib
 
 import requests
 
-from computer_vision_client.image_response import ImageResponse
+from azure_computer_vision_client.image_response import ImageResponse
 
 
 class ComputerVisionClient(object):
 
-    ENVIRONMENT_VARIABLE = 'AZURE_COMPUTER_VISION_KEY'
-
-    def __init__(self, region_name, subscription_key=None):
-        subscription_key = subscription_key or os.environ.get(self.ENVIRONMENT_VARIABLE)
+    def __init__(self, region_name, subscription_key=None, env_variable='AZURE_COMPUTER_VISION_KEY'):
+        subscription_key = subscription_key or os.environ.get(env_variable)
         if subscription_key is None:
-            raise Exception(
-                "subscription_key is required as a parameter or as the environment variable {}"
-                    .format(self.ENVIRONMENT_VARIABLE))
+            raise Exception("subscription_key is required")
 
         self.subscription_key = subscription_key
         self.region_name = region_name
+        self.env_variable = env_variable
 
     def analyze_image_file(self, image_file, **kwargs):
+        return self.analyze_image_bytes(open(image_file,'rb'), **kwargs)
+
+    def analyze_image_bytes(self, bytes, **kwargs):
         return self.__analyze(
-            files=dict(file=open(image_file,'rb')),
+            files=dict(file=bytes),
             headers={
                 'Ocp-Apim-Subscription-Key': self.subscription_key,
             },
